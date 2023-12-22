@@ -30,9 +30,7 @@ export default class SplashScreen extends Component {
 
     if (this.keyValueStore.getItem("seen-splash-screen") === undefined) {
       this.keyValueStore.setItem("seen-splash-screen", true);
-    }
-
-    if (this.keyValueStore.getItem("seen-splash-screen") === true) {
+    } else if (this.keyValueStore.getItem("seen-splash-screen") === "true") {
       this.currentPage = this.pages.length;
     }
   }

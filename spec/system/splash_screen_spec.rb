@@ -74,6 +74,18 @@ RSpec.describe "Splash screen spec", system: true do
       expect(page).to have_css(".login-modal")
       expect(splash_screen).to have_no_splash_screen
     end
+
+    context "when the user has already seen the splash screen" do
+      before { visit("/") }
+
+      it "should skip to the last page of the splash screen" do
+        visit("/")
+        expect(splash_screen).to have_heading("Ready to Get Started?")
+        expect(splash_screen).to have_description(
+          "Join us now and experience a new level of convenience and excitement."
+        )
+      end
+    end
   end
 
   context "when user is logged in" do
