@@ -123,7 +123,13 @@ export default class SplashScreen extends Component {
       {{didInsert this.setupEvents this.pages}}
       {{willDestroy this.teardownEvents this.pages}}
     >
-      {{! TODO: Add background image }}
+      {{#if this.currentPageData.background_image_url}}
+        <div class="splash-screen__image">
+          <img 
+            src={{this.currentPageData.background_image_url}}
+          />
+        </div>
+      {{/if}}
 
       <div class="splash-screen__content">
         <h1
