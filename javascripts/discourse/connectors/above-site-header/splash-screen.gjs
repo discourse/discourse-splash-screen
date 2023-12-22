@@ -42,8 +42,6 @@ export default class SplashScreen extends Component {
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error("Error parsing JSON:", error);
-      // Skip the splash screen and jump to login prompt
-      return DiscourseURL.routeTo("/login");
     }
   }
 
