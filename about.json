@@ -1,8 +1,8 @@
 {
-  "name": "TODO",
+  "name": "Splash Screen",
   "component": true,
   "authors": "Discourse",
-  "license_url": "TODO",
+  "license_url": "https://raw.githubusercontent.com/discourse/discourse-splash-screen/main/LICENSE",
   "about_url": "TODO",
   "learn_more": "TODO",
   "theme_version": "0.0.1",

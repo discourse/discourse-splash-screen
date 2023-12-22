@@ -1,7 +1,7 @@
 {
-  "name": "TODO",
+  "name": "discourse-splash-screen",
   "version": "0.0.1",
-  "repository": "TODO",
+  "repository": "https://github.com/discourse/discourse-splash-screen",
   "author": "Discourse",
   "license": "MIT",
   "devDependencies": {
