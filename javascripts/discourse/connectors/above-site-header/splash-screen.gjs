@@ -9,7 +9,6 @@ import SwipeEvents from "discourse/lib/swipe-events";
 import DiscourseURL from "discourse/lib/url";
 import i18n from "discourse-common/helpers/i18n";
 import I18n from "discourse-i18n";
-import not from "truth-helpers/helpers/not";
 
 export default class SplashScreen extends Component {
   static shouldRender(outletArgs, helper) {
@@ -151,13 +150,13 @@ export default class SplashScreen extends Component {
       </div>
 
       <div class="splash-screen__actions">
-        {{#if (not this.onLastPage)}}
+        {{#unless this.onLastPage}}
           <DButton
             @class="btn-flat splash-screen__actions__skip"
             @translatedLabel={{i18n (themePrefix "actions.skip")}}
             @action={{this.goToEnd}}
           />
-        {{/if}}
+        {{/unless}}
 
         <DButton
           @class="btn-primary splash-screen__actions__next"
