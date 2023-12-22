@@ -1,2 +1,6 @@
 en:
-  placeholder: placeholder
+  actions:
+    skip: "Skip"
+    previous: "Previous"
+    next: "Next"
+    finish: "Start"

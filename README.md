@@ -1,4 +1,4 @@
-# **Theme Name**
+# **Splash Screen**
 
 **Theme Summary**
 

@@ -1,0 +1,49 @@
+.splash-screen {
+  display: none;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: var(--secondary);
+  color: var(--primary);
+  position: fixed;
+  text-align: center;
+
+  &__image {
+    width: 100%;
+    height: auto;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__content {
+    padding: 1rem;
+  }
+
+  &__actions {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+
+  &__indicators {
+    .d-icon {
+      opacity: 0.5;
+    }
+    .active .d-icon {
+      opacity: 1;
+      color: var(--tertiary);
+    }
+  }
+}
+
+html.splash-screen-active {
+  overflow: hidden;
+
+  .splash-screen {
+    display: block;
+  }
+}
