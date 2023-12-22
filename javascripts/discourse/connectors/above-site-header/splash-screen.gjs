@@ -125,9 +125,7 @@ export default class SplashScreen extends Component {
     >
       {{#if this.currentPageData.background_image_url}}
         <div class="splash-screen__image">
-          <img 
-            src={{this.currentPageData.background_image_url}}
-          />
+          <img src={{this.currentPageData.background_image_url}} />
         </div>
       {{/if}}
 
