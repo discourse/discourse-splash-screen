@@ -31,7 +31,7 @@ export default class SplashScreen extends Component {
     if (this.keyValueStore.getItem("seen-splash-screen") === undefined) {
       this.keyValueStore.setItem("seen-splash-screen", true);
     } else if (this.keyValueStore.getItem("seen-splash-screen") === "true") {
-      this.currentPage = this.pages.length;
+      this.skipSplashScreen();
     }
   }
 
@@ -76,8 +76,7 @@ export default class SplashScreen extends Component {
   @action
   goToNext() {
     if (this.onLastPage) {
-      document.documentElement.classList.remove("splash-screen-active");
-      DiscourseURL.routeTo("/login");
+      this.skipSplashScreen();
     }
 
     if (this.currentPage < this.pages.length) {
@@ -86,8 +85,9 @@ export default class SplashScreen extends Component {
   }
 
   @action
-  goToEnd() {
-    this.currentPage = this.pages.length;
+  skipSplashScreen() {
+    document.documentElement.classList.remove("splash-screen-active");
+    DiscourseURL.routeTo("/login");
   }
 
   @action
@@ -154,7 +154,7 @@ export default class SplashScreen extends Component {
           <DButton
             @class="btn-flat splash-screen__actions__skip"
             @translatedLabel={{i18n (themePrefix "actions.skip")}}
-            @action={{this.goToEnd}}
+            @action={{this.skipSplashScreen}}
           />
         {{/unless}}
 

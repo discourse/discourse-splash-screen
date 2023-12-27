@@ -45,15 +45,11 @@ RSpec.describe "Splash screen spec", system: true do
       expect(splash_screen).to have_description(slide_2_description)
     end
 
-    it "should skip to the last slide when clicking the skip button" do
-      final_title = "Ready to Get Started?"
-      final_description =
-        "Join us now and experience a new level of convenience and excitement."
-
+    it "should skip to the login page when clicking the skip button" do
       visit("/")
       splash_screen.click_skip_button
-      expect(splash_screen).to have_heading(final_title)
-      expect(splash_screen).to have_description(final_description)
+      expect(page).to have_css(".login-modal")
+      expect(splash_screen).to have_no_splash_screen
     end
 
     it "should go to the page when clicking on the indicator dot" do
@@ -69,8 +65,7 @@ RSpec.describe "Splash screen spec", system: true do
 
     it "should go to the login page after clicking through all the slides" do
       visit("/")
-      splash_screen.click_skip_button
-      splash_screen.click_next_button
+      5.times { splash_screen.click_next_button }
       expect(page).to have_css(".login-modal")
       expect(splash_screen).to have_no_splash_screen
     end
@@ -78,12 +73,10 @@ RSpec.describe "Splash screen spec", system: true do
     context "when the user has already seen the splash screen" do
       before { visit("/") }
 
-      it "should skip to the last page of the splash screen" do
+      it "should skip to the login page" do
         visit("/")
-        expect(splash_screen).to have_heading("Ready to Get Started?")
-        expect(splash_screen).to have_description(
-          "Join us now and experience a new level of convenience and excitement."
-        )
+        expect(page).to have_css(".login-modal")
+        expect(splash_screen).to have_no_splash_screen
       end
     end
   end
