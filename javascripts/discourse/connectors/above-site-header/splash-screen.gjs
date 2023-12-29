@@ -120,6 +120,7 @@ export default class SplashScreen extends Component {
   <template>
     <div
       class="splash-screen"
+      data-page={{this.currentPage}}
       {{didInsert this.setupEvents this.pages}}
       {{willDestroy this.teardownEvents this.pages}}
     >
