@@ -14,7 +14,25 @@ RSpec.describe "Splash screen spec", system: true do
     theme_component.save!
   end
 
-  context "when user is not logged in" do
+  context "when on desktop mode" do
+    context "when user is not logged in" do
+      it "should not show the splash screen" do
+        visit("/")
+        expect(splash_screen).to have_no_splash_screen
+      end
+    end
+
+    context "when user is logged in" do
+      before { sign_in(user) }
+
+      it "should not show the splash screen" do
+        visit("/")
+        expect(splash_screen).to have_no_splash_screen
+      end
+    end
+  end
+
+  context "when user is not logged in", mobile: true do
     it "should show the splash screen" do
       visit("/")
       expect(splash_screen).to have_splash_screen
@@ -81,7 +99,7 @@ RSpec.describe "Splash screen spec", system: true do
     end
   end
 
-  context "when user is logged in" do
+  context "when user is logged in", mobile: true do
     before { sign_in(user) }
 
     it "should not show the splash screen" do
