@@ -131,6 +131,11 @@ export default class SplashScreen extends Component {
       {{/if}}
 
       <div class="splash-screen__content">
+        {{#if this.currentPageData.logo_url}}
+          <div class="splash-screen__logo">
+            <img src={{this.currentPageData.logo_url}} />
+          </div>
+        {{/if}}
         <h1
           class="splash-screen__content__title"
         >{{this.currentPageData.title}}</h1>
