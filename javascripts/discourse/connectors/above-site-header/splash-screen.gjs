@@ -12,12 +12,14 @@ import I18n from "discourse-i18n";
 
 export default class SplashScreen extends Component {
   static shouldRender(outletArgs, helper) {
-
     if (helper.currentUser || helper.site.desktopView) {
       return false;
     }
 
-    if (settings.only_show_mobile_app && window.ReactNativeWebView === undefined) {
+    if (
+      settings.only_show_mobile_app &&
+      window.ReactNativeWebView === undefined
+    ) {
       return false;
     }
 
