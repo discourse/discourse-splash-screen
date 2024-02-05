@@ -27,3 +27,8 @@ slide_data:
         "additionalProperties": false
       }
     }
+only_show_mobile_app:
+  type: bool
+  default: false
+  description:
+    en: "Only show on mobile app."

@@ -1,5 +1,6 @@
 .splash-screen {
   padding-block: 4rem;
+  box-sizing: border-box;
   display: none;
   width: 100%;
   height: 100%;
@@ -8,10 +9,12 @@
   color: var(--primary);
   position: fixed;
   text-align: center;
+  flex-direction: column;
+  justify-content: flex-end;
 
   &__image {
     width: 100%;
-    height: auto;
+    flex-grow: 4;
 
     img {
       mask-image: linear-gradient(
@@ -53,6 +56,6 @@ html.splash-screen-active {
   overflow: hidden;
 
   .splash-screen {
-    display: block;
+    display: flex;
   }
 }
