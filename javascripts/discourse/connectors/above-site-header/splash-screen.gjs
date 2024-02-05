@@ -12,7 +12,12 @@ import I18n from "discourse-i18n";
 
 export default class SplashScreen extends Component {
   static shouldRender(outletArgs, helper) {
+
     if (helper.currentUser || helper.site.desktopView) {
+      return false;
+    }
+
+    if (settings.only_show_mobile_app && window.ReactNativeWebView === undefined) {
       return false;
     }
 
@@ -21,18 +26,14 @@ export default class SplashScreen extends Component {
 
   @service currentUser;
   @service keyValueStore;
+  @service siteSettings;
+
   @tracked currentPage = 1;
   swipeEvents = null;
 
   constructor() {
     super(...arguments);
     document.documentElement.classList.add("splash-screen-active");
-
-    if (this.keyValueStore.getItem("seen-splash-screen") === undefined) {
-      this.keyValueStore.setItem("seen-splash-screen", true);
-    } else if (this.keyValueStore.getItem("seen-splash-screen") === "true") {
-      this.skipSplashScreen();
-    }
   }
 
   get pages() {
@@ -76,7 +77,7 @@ export default class SplashScreen extends Component {
   @action
   goToNext() {
     if (this.onLastPage) {
-      this.skipSplashScreen();
+      this.triggerLogin();
     }
 
     if (this.currentPage < this.pages.length) {
@@ -85,9 +86,25 @@ export default class SplashScreen extends Component {
   }
 
   @action
-  skipSplashScreen() {
-    document.documentElement.classList.remove("splash-screen-active");
-    DiscourseURL.routeTo("/login");
+  triggerLogin() {
+    // perform action via button first
+    // route redirection sometimes results in an auth CRSF error
+    // Ember routing may skip adding the CSRF token
+    const loginButton = document.querySelector(".login-button");
+    if (loginButton) {
+      loginButton.click();
+    } else {
+      DiscourseURL.routeTo("/login");
+    }
+
+    // if local logins are enabled, we'll be showing a login modal
+    // so we can remove the splash screen
+    // however, when local logins are disabled, we'll be redirecting
+    // it's best to keep the splash screen until the redirect happens
+    // otherwise we would be flashing other content for a split second
+    if (this.siteSettings.enable_local_logins) {
+      document.documentElement.classList.remove("splash-screen-active");
+    }
   }
 
   @action
@@ -109,6 +126,12 @@ export default class SplashScreen extends Component {
     this.swipeEvents = new SwipeEvents(element);
     this.swipeEvents.addTouchListeners();
     element.addEventListener("swipeend", this.handleSwipeEnd);
+
+    if (this.keyValueStore.getItem("seen-splash-screen") === undefined) {
+      this.keyValueStore.setItem("seen-splash-screen", true);
+    } else if (this.keyValueStore.getItem("seen-splash-screen") === "true") {
+      this.currentPage = this.pages.length;
+    }
   }
 
   teardownEvents(element) {
@@ -124,11 +147,11 @@ export default class SplashScreen extends Component {
       {{didInsert this.setupEvents this.pages}}
       {{willDestroy this.teardownEvents this.pages}}
     >
-      {{#if this.currentPageData.background_image_url}}
-        <div class="splash-screen__image">
+      <div class="splash-screen__image">
+        {{#if this.currentPageData.background_image_url}}
           <img src={{this.currentPageData.background_image_url}} />
-        </div>
-      {{/if}}
+        {{/if}}
+      </div>
 
       <div class="splash-screen__content">
         {{#if this.currentPageData.logo_url}}
@@ -160,7 +183,7 @@ export default class SplashScreen extends Component {
           <DButton
             @class="btn-flat splash-screen__actions__skip"
             @translatedLabel={{i18n (themePrefix "actions.skip")}}
-            @action={{this.skipSplashScreen}}
+            @action={{this.triggerLogin}}
           />
         {{/unless}}
 
