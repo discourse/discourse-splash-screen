@@ -4,3 +4,10 @@ en:
     previous: "Previous"
     next: "Next"
     finish: "Start"
+  slides:
+    slide1: ""
+    slide2: ""
+    slide3: ""
+    slide4: ""
+    slide5: ""
+    heading: ""

@@ -1,34 +1,10 @@
-slide_data:
-  default: "[]"
-  json_schema: >-
-    {
-      "type": "array",
-      "uniqueItems": true,
-      "items": {
-        "type": "object",
-        "properties": {
-          "title": {
-            "type": "string",
-            "minLength": 1
-          },
-          "description": {
-            "type": "string",
-            "minLength": 1
-          },
-          "logo_url": {
-            "type": "string",
-            "format": "url"
-          },
-          "background_image_url": {
-            "type": "string",
-            "format": "url"
-          }
-        },
-        "additionalProperties": false
-      }
-    }
 only_show_mobile_app:
   type: bool
   default: false
   description:
     en: "Only show on mobile app."
+number_of_slides:
+  type: integer
+  default: 3
+  description:
+    en: "Number of slides to show. (Max is 5)"
