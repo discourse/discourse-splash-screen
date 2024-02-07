@@ -39,13 +39,9 @@ export default class SplashScreen extends Component {
   }
 
   get pages() {
-    try {
-      const parsedData = JSON.parse(settings.slide_data);
-      return parsedData;
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error("Error parsing JSON:", error);
-    }
+    return Array.from({ length: settings.number_of_slides }, (v, k) => ({
+      description: I18n.t(themePrefix(`slides.slide${k + 1}`)),
+    }));
   }
 
   get currentPageData() {
@@ -132,7 +128,7 @@ export default class SplashScreen extends Component {
     if (this.keyValueStore.getItem("seen-splash-screen") === undefined) {
       this.keyValueStore.setItem("seen-splash-screen", true);
     } else if (this.keyValueStore.getItem("seen-splash-screen") === "true") {
-      this.currentPage = this.pages.length;
+      document.documentElement.classList.remove("splash-screen-active");
     }
   }
 
@@ -150,20 +146,12 @@ export default class SplashScreen extends Component {
       {{willDestroy this.teardownEvents this.pages}}
     >
       <div class="splash-screen__image">
-        {{#if this.currentPageData.background_image_url}}
-          <img src={{this.currentPageData.background_image_url}} />
-        {{/if}}
       </div>
 
       <div class="splash-screen__content">
-        {{#if this.currentPageData.logo_url}}
-          <div class="splash-screen__logo">
-            <img src={{this.currentPageData.logo_url}} />
-          </div>
-        {{/if}}
-        <h1
-          class="splash-screen__content__title"
-        >{{this.currentPageData.title}}</h1>
+        <h1 class="splash-screen__content__title">{{i18n
+            (themePrefix "slides.heading")
+          }}</h1>
         <p
           class="splash-screen__content__description"
         >{{this.currentPageData.description}}</p>

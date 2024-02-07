@@ -15,6 +15,9 @@
   &__image {
     width: 100%;
     flex-grow: 4;
+    background: url($pins) no-repeat center top;
+    background-size: 100%;
+    transition: background-position 0.5s ease-in-out;
 
     img {
       mask-image: linear-gradient(
@@ -24,6 +27,22 @@
       );
       width: 70%;
     }
+  }
+
+  &[data-page="2"] .splash-screen__image {
+    background-position: center -300px;
+  }
+
+  &[data-page="3"] .splash-screen__image {
+    background-position: center -600px;
+  }
+
+  &[data-page="4"] .splash-screen__image {
+    background-position: center -900px;
+  }
+
+  &[data-page="5"] .splash-screen__image {
+    background-position: center -1200px;
   }
 
   &__logo {
