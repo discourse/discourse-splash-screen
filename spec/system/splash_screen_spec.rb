@@ -12,6 +12,7 @@ RSpec.describe "Splash screen spec", system: true do
     theme_component.update_translation("slides.slide1", "Slide 1 description")
     theme_component.update_translation("slides.slide2", "Slide 2 description")
     theme_component.update_translation("slides.slide3", "Slide 3 description")
+    theme_component.update_translation("slides.heading", "Community")
     theme_component.save!
   end
 
