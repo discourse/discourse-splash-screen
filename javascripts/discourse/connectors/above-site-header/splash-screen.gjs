@@ -3,7 +3,7 @@ import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
 import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import willDestroy from "@ember/render-modifiers/modifiers/will-destroy";
-import { inject as service } from "@ember/service";
+import { service } from "@ember/service";
 import DButton from "discourse/components/d-button";
 import SwipeEvents from "discourse/lib/swipe-events";
 import DiscourseURL from "discourse/lib/url";
@@ -158,9 +158,10 @@ export default class SplashScreen extends Component {
       </div>
 
       <div class="splash-screen__indicators">
+        {{! eslint-disable-next-line no-unused-vars }}{{! workaround https://github.com/ember-cli/eslint-plugin-ember/issues/2118 }}
         {{#each this.pages as |page index|}}
           <DButton
-            @class="btn-transparent {{this.pageIsActive index}}"
+            class="btn-transparent {{this.pageIsActive index}}"
             @icon="circle"
             @action={{this.goToPage}}
             @actionParam={{index}}
@@ -171,14 +172,14 @@ export default class SplashScreen extends Component {
       <div class="splash-screen__actions">
         {{#unless this.onLastPage}}
           <DButton
-            @class="btn-flat splash-screen__actions__skip"
+            class="btn-flat splash-screen__actions__skip"
             @translatedLabel={{i18n (themePrefix "actions.skip")}}
             @action={{this.triggerLogin}}
           />
         {{/unless}}
 
         <DButton
-          @class="btn-primary splash-screen__actions__next"
+          class="btn-primary splash-screen__actions__next"
           @translatedLabel={{this.nextButtonLabel}}
           @action={{this.goToNext}}
         />
