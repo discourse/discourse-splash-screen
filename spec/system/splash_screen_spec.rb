@@ -42,8 +42,8 @@ RSpec.describe "Splash screen spec", system: true do
 
     it "should show the correct title and description" do
       visit("/")
-      heading = theme_component.translations.detect {|e| e.key == "slides.heading" }
-      slide1 = theme_component.translations.detect {|e| e.key == "slides.slide1" }
+      heading = theme_component.translations.detect { |e| e.key == "slides.heading" }
+      slide1 = theme_component.translations.detect { |e| e.key == "slides.slide1" }
 
       expect(splash_screen).to have_heading(heading.value)
       expect(splash_screen).to have_description(slide1.value)
@@ -52,9 +52,9 @@ RSpec.describe "Splash screen spec", system: true do
     it "should change to the next slide when clicking the next button" do
       visit("/")
 
-      heading = theme_component.translations.detect {|e| e.key == "slides.heading" }
-      slide1 = theme_component.translations.detect {|e| e.key == "slides.slide1" }
-      slide2 = theme_component.translations.detect {|e| e.key == "slides.slide2" }
+      heading = theme_component.translations.detect { |e| e.key == "slides.heading" }
+      slide1 = theme_component.translations.detect { |e| e.key == "slides.slide1" }
+      slide2 = theme_component.translations.detect { |e| e.key == "slides.slide2" }
 
       expect(splash_screen).to have_heading(heading.value)
       expect(splash_screen).to have_description(slide1.value)
@@ -71,8 +71,8 @@ RSpec.describe "Splash screen spec", system: true do
 
     it "should go to the page when clicking on the indicator dot" do
       visit("/")
-      heading = theme_component.translations.detect {|e| e.key == "slides.heading" }
-      slide3 = theme_component.translations.detect {|e| e.key == "slides.slide3" }
+      heading = theme_component.translations.detect { |e| e.key == "slides.heading" }
+      slide3 = theme_component.translations.detect { |e| e.key == "slides.slide3" }
 
       splash_screen.click_indicator(3)
       expect(splash_screen).to have_heading(heading.value)
