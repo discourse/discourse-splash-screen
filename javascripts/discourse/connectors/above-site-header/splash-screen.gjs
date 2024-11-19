@@ -158,7 +158,6 @@ export default class SplashScreen extends Component {
       </div>
 
       <div class="splash-screen__indicators">
-        {{! workaround https://github.com/ember-cli/eslint-plugin-ember/issues/2118 }}
         {{#each this.pages as |page index|}}
           <DButton
             class="btn-transparent {{this.pageIsActive index}}"
