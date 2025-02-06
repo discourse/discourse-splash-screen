@@ -7,8 +7,7 @@ import { service } from "@ember/service";
 import DButton from "discourse/components/d-button";
 import SwipeEvents from "discourse/lib/swipe-events";
 import DiscourseURL from "discourse/lib/url";
-import i18n from "discourse-common/helpers/i18n";
-import I18n from "discourse-i18n";
+import { i18n } from "discourse-i18n";
 
 export default class SplashScreen extends Component {
   static shouldRender(outletArgs, helper) {
@@ -40,7 +39,7 @@ export default class SplashScreen extends Component {
 
   get pages() {
     return Array.from({ length: settings.number_of_slides }, (v, k) => ({
-      description: I18n.t(themePrefix(`slides.slide${k + 1}`)),
+      description: i18n(themePrefix(`slides.slide${k + 1}`)),
     }));
   }
 
@@ -50,9 +49,9 @@ export default class SplashScreen extends Component {
 
   get nextButtonLabel() {
     if (this.onLastPage) {
-      return I18n.t(themePrefix("actions.finish"));
+      return i18n(themePrefix("actions.finish"));
     } else {
-      return I18n.t(themePrefix("actions.next"));
+      return i18n(themePrefix("actions.next"));
     }
   }
 
