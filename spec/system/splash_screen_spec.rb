@@ -65,7 +65,7 @@ RSpec.describe "Splash screen spec", system: true do
     it "should skip to the login page when clicking the skip button" do
       visit("/")
       splash_screen.click_skip_button
-      expect(page).to have_css(".login-modal")
+      expect(page).to have_css(".login-fullpage")
       expect(splash_screen).to have_no_splash_screen
     end
 
@@ -83,7 +83,7 @@ RSpec.describe "Splash screen spec", system: true do
       visit("/")
       # Defaults to 3 slides
       3.times { splash_screen.click_next_button }
-      expect(page).to have_css(".login-modal")
+      expect(page).to have_css(".login-fullpage")
       expect(splash_screen).to have_no_splash_screen
     end
 
