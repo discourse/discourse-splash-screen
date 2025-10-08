@@ -25,7 +25,6 @@ export default class SplashScreen extends Component {
     return true;
   }
 
-  @service currentUser;
   @service keyValueStore;
   @service siteSettings;
 
