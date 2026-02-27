@@ -1,5 +1,6 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
+import { fn } from "@ember/helper";
 import { action } from "@ember/object";
 import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import willDestroy from "@ember/render-modifiers/modifiers/will-destroy";
@@ -158,10 +159,9 @@ export default class SplashScreen extends Component {
       <div class="splash-screen__indicators">
         {{#each this.pages as |page index|}}
           <DButton
-            class="btn-transparent {{this.pageIsActive index}}"
+            @action={{fn this.goToPage index}}
             @icon="circle"
-            @action={{this.goToPage}}
-            @actionParam={{index}}
+            class="btn-transparent {{this.pageIsActive index}}"
           />
         {{/each}}
       </div>
